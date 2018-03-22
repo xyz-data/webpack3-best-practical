@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <title>using ES6 today & webpack</title> -->
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div>
+        <h1>this is an <span>H1</span> title!</h1>
+    </div>
+    <section>
+        <article>
+            <header>article header</header>
+            <section>
+                article section<br/> article section<br/> article section<br/>
+            </section>
+        </article>
+    </section>
+    <!-- js: libs -->
+    <!-- 
+        <script src="../build/libs/require.min.js"></script>
+     -->
+    <!-- 
+        <script src="../build/libs/system.js"></script>
+        <script>
+            System.import("./index.js");
+        </script>
+     -->
+    <!-- js & webpack no need module loader !-->
+    <!-- <script src="./index.min.js"></script>
+    <script src="./no-import-module.min.js"></script> -->
+</body>
+
+</html>
