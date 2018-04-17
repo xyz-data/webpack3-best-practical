@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+/* svg.scss */
+
+[data-img="gear-svg"] {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    background: border-box #0f0 url("../imgs/gear_x64.svg") border-box 100px 100px center no-repeat 64px 64px fixed;
+}
+
+[data-img="home-svg"] {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    background: border-box #0f0 url("../imgs/home_x64.svg") border-box 100px 100px center no-repeat 64px 64px fixed;
+}
+
+
+/* background args bug*/
+
+.settingIcon {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #f0f;
+    background: border-box #0f0 url("../imgs/gear_x64.png") border-box center no-repeat;
+}

@@ -3,18 +3,62 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,minimum-scale=0.5,user-scalable=yes">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <meta name="description" content="API Tools">
     <!-- <title>using ES6 today & webpack</title> -->
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
-    <div>
+    <section>
         <h1>this is an <span>H1</span> title!</h1>
-    </div>
+        <div>
+            <!-- <figure>
+                <img src="./imgs/home_x64.svg" alt="home_x64.svg" title="home_x64.svg">
+                <figcaption>home_x64.svg 15kb</figcaption>
+            </figure>
+            <figure>
+                <img src="./imgs/gear_x64.svg" alt="gear_x64.svg" title="gear_x64.svg">
+                <figcaption>gear_x64.svg 4kb</figcaption>
+            </figure>
+            <figure>
+                <img src="./imgs/home_x64.png" alt="home_x64.png" title="home_x64.png">
+                <figcaption>home_x64.png 9kb</figcaption>
+            </figure>
+            <figure>
+                <img src="./imgs/gear_x64.png" alt="gear_x64.png" title="gear_x64.png">
+                <figcaption>gear_x64.png 7kb</figcaption>
+            </figure> -->
+            <figure>
+                <img alt="gear_x64.png" title="gear_x64.png" data-uid="test" id="test">
+                <figcaption>gear_x64.png 7kb</figcaption>
+            </figure>
+        </div>
+        <div class="settingIcon">smg</div>
+    </section>
+    <section>
+        <div data-img="home-png">
+            <!-- base64 & png 9kb-->
+            dataset bug
+        </div>
+        <div data-img="gear-png">
+            <!-- base64 & png 7kb-->
+            dataset bug
+        </div>
+        <div class="home_png">
+            <!-- base64 & png 9kb-->
+            class bug
+        </div>
+        <div class="gear_png">
+            <!-- base64 & png 7kb-->
+            class bug
+        </div>
+    </section>
     <section>
         <article>
             <header>article header</header>
@@ -24,10 +68,10 @@
         </article>
     </section>
     <!-- js: libs -->
-    <!-- 
+    <!--
         <script src="../build/libs/require.min.js"></script>
      -->
-    <!-- 
+    <!--
         <script src="../build/libs/system.js"></script>
         <script>
             System.import("./index.js");

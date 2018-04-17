@@ -2,6 +2,53 @@
 
 > Webpack3.x Best Practical
 
+```sh
+
+$ npm i -D copy-webpack-plugin
+
+$
+
+$
+
+$
+
+$
+
+$
+
+
+```
+
+
+`copy-webpack-plugin`
+
+https://stackoverflow.com/questions/27639005/how-to-copy-static-files-to-build-directory-with-webpack
+
+https://webpack.js.org/plugins/copy-webpack-plugin/
+
+
+
+`vendor` === `npm_packages.dependencies`
+
+https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk
+
+
+
+```js
+
+import img from './image.png'
+
+
+```
+
+https://webpack.js.org/loaders/url-loader/
+
+https://medium.com/a-beginners-guide-for-webpack-2
+https://medium.com/a-beginners-guide-for-webpack-2/handling-images-e1a2a2c28f8d
+https://medium.com/a-beginners-guide-for-webpack-2/file-loader-for-large-size-images-97b90249aef
+
+
+
 
 
 1. Node.js & NPM
@@ -45,6 +92,7 @@ Travis CI
 bin & cli
 
 $ touch
+
 $ for loop ???
 
 $ dir | clip

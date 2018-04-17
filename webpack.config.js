@@ -19,26 +19,32 @@
 // import UglifyJSPlugin from "uglifyjs-webpack-plugin";
 // import HtmlWebpackPlugin from "html-webpack-plugin";
 
+// vendor & package.dependencies
+const npm_packages = require("./package.json");
 
-const path = require('path');
-const webpack = require('webpack'); //to access built-in plugins
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');// template
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const path = require("path");
+const webpack = require("webpack"); //to access built-in plugins
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");// template
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");// extract css files
+const CopyWebpackPlugin = require("copy-webpack-plugin");// copy folder
 
 // set process.env.NODE_ENV && npm run dev
-if (process.env.NODE_ENV !== 'production') {
-    console.log('😃, Looks like we are in development mode!');
+if (process.env.NODE_ENV !== "production") {
+    console.log(`😃, Looks like we are in development mode!`);
+    console.log(`npm_packages = \n`, JSON.stringify(npm_packages.dependencies, null, 4));
 }else{
-    console.log('Tada, 🎉, we are in production mode!');
+    console.log(`Tada, 🎉, we are in production mode!`);
 }
 
 // const extractSCSS = new ExtractTextPlugin('stylesheets/[name]-one.scss');
 const extractSCSS = new ExtractTextPlugin({
     filename: (getPath) => {
         // relative path
-        return getPath('css/[name].[hash:16].css');
+        return getPath('css/[name].css?[hash:8]');
+        // return getPath('css/[name].[hash:16].css?[hash:8]');// hash
         // js/../css & bug ???
         // return getPath('../css/[name].css');
         // return getPath('../css/[name].[hash:16].css').replace('js/../css', './css');
@@ -71,7 +77,7 @@ MODULES_OBJ.forEach(
 );
 
 entry_obj["index"] = `${BASE_URI.APP}`;
-entry_obj["server"] = `${BASE_URI.SERVER}`;
+// entry_obj["server"] = `${BASE_URI.SERVER}`;
 entry_obj["no-import-module"] = `${BASE_URI.NIM}`;
 
 
@@ -81,7 +87,8 @@ module.exports = {
         path: path.resolve(__dirname, "build/"),
         // path: path.resolve(__dirname, "build/js/"),
         // filename: '[name].min.js',
-        filename: 'js/[name].[hash:16].min.js',// hash version
+        filename: "js/[name].min.js?[hash:8]",// hash version
+        // filename: "js/[name].[hash:16].min.js?[hash:8]",// hash version
         // [hash] & [chunkhash] can using [hash:16] (default 20)。
         // filename: "[chunkhash].bundle.js",
         // publicPath: '/'
@@ -90,40 +97,49 @@ module.exports = {
     },
     resolve: {
         // auto resolve files's extensions
-        extensions: ['.js', '.jsx','.scss', '.sass', '.css'],
+        extensions: [
+            ".js",
+            ".jsx",
+            ".tsx",
+            ".scss",
+            ".sass",
+            ".css"
+        ],
     },
     module: {
         // loaders
         rules: [
             {
-                test: /\.js$/,
-                // test: /\.(js|jsx)$/,
+                // test: /\.js$/,
+                test: /\.(js|jsx|tsx)$/,
                 exclude: /node_modules/,
                 // exclude: /(node_modules|bower_components)/,
                 use: [
                     {
                         loader: "babel-loader",
                         options: {
-                            presets: ['env'],
+                            presets: ["env"],
                         },
                     }
                 ],
             },
             {
                 // test: /\.scss$/,
-                test: /\.(scss|sass|css)$/,
+                test: /\.((s*)css|sass)$/,
                 // test: /\.(css|scss|sass)$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: [
                         {
-                            loader: 'css-loader',
+                            loader: "css-loader",
                             options: {
                                 url: false,
+                                // url: true,
                                 minimize: true,
                                 sourceMap: true,
                                 modules: true,
-                                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                                localIdentName: "[local]",// class name no hash!
+                                // localIdentName: "[path][name]__[local]--[hash:base64:5]",
                                 // camelCase: true,
                                 // importLoaders: 1,
                                 // 0 => none loader(default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
@@ -133,7 +149,7 @@ module.exports = {
                             }
                         },
                         {
-                            loader: 'sass-loader',
+                            loader: "sass-loader",
                             options: {
                                 sourceMap: true,
                                 // includePaths: [
@@ -144,18 +160,20 @@ module.exports = {
                     ],
                     // allChunks: true,
                     publicPath: "./public",// not work ant all
-                })
+                }),
             },
             {
-                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                loader: 'url-loader',
+                test: /\.(png|jp(e*)g|gif|svg|eot|ttf|woff|woff2)$/,
+                loader: "url-loader",
                 options: {
-                    limit: 10000,
+                    limit: 8192,// 8KB ? 8192 : 8000
+                    // name: "imgs/[name]",
+                    name: "imgs/[hash]-[name].[ext]",// imgs
                 }
             },
         ],
     },
-    devtool: 'source-map',
+    devtool: "source-map",
     plugins: [
         new UglifyJSPlugin({
             sourceMap: true,
@@ -208,10 +226,16 @@ module.exports = {
                 removeEmptyElements: true,
                 quoteCharacter: true,
                 // useShortDoctype: true,
-                // removeTagWhitespace: true,
+                removeTagWhitespace: true,
             },
             hash: true,// all files & path hash
         }),
         // new CleanWebpackPlugin(['build']),// rm-rf
+        new CopyWebpackPlugin([
+            {
+                from: "src/imgs",
+                to: "imgs"
+            }
+        ]),
     ],
 };

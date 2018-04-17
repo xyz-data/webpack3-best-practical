@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+/* index.css */
+
+:poot {
+    --color: red;
+    --font-size: 12px;
+}
+
+* {
+    color: var(--color);
+    font-size: var(--font-size);
+}
+
+.home_png {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border: 1px solid red;
+    background: border-box #fff url("../imgs/home_x64.png") border-box center no-repeat;
+}
+
+.gear_png {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border: 1px solid red;
+    background: border-box #fff url("../imgs/gear_x64.png") border-box center no-repeat;
+}
+
+
+/* html5 dataset bug */
+
+[data-img="home-png"] {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #0f0;
+    background: border-box #fff url("../imgs/home_x64.png") border-box center no-repeat;
+}
+
+[data-img="gear-png"] {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #0f0;
+    background: border-box #fff url("../imgs/gear_x64.png") border-box center no-repeat;
+}
+
+
+/*
+
+multi & group
+
+background: url("./imgs/gear_x64.png") #000 no-repeat 100px 100px, url("./imgs/gear_x64.svg") #000 no-repeat 100px 100px;
+
+*/
+
+
+/*
+
+shorthand:
+
+background-clip: border-box/padding-box/content-box/text;
+background-color,
+background-image,
+background-origin: border-box/padding-box/content-box;
+background-position: top/bottom/left/right/center/(values|multi values);
+background-repeat: no-repeat/repeat/repeat-x/repeat-y/space/round;
+background-size: contain/cover/auto/(value|values);
+background-attachment: fixed/scroll/local;
+
+
+*/
