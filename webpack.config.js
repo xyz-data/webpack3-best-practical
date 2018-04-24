@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @Created by xgqfrms on 2016/1/26.
